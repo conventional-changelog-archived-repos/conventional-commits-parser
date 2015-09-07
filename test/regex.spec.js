@@ -108,21 +108,21 @@ describe('regex', function() {
       var match = reReferenceParts.exec('#1');
       expect(match[0]).to.equal('#1');
       expect(match[1]).to.equal(undefined);
-      expect(match[2]).to.equal('1');
+      expect(match[2]).to.equal('#1');
     });
 
     it('should match reference parts with something else', function() {
       var match = reReferenceParts.exec('something else #1');
       expect(match[0]).to.equal('something else #1');
       expect(match[1]).to.equal(undefined);
-      expect(match[2]).to.equal('1');
+      expect(match[2]).to.equal('#1');
     });
 
     it('should match reference parts with a repository', function() {
       var match = reReferenceParts.exec('repo#1');
       expect(match[0]).to.equal('repo#1');
       expect(match[1]).to.equal('repo');
-      expect(match[2]).to.equal('1');
+      expect(match[2]).to.equal('#1');
     });
 
     it('should match reference parts with multiple references', function() {
@@ -130,22 +130,22 @@ describe('regex', function() {
       var match = reReferenceParts.exec(string);
       expect(match[0]).to.equal('#1');
       expect(match[1]).to.equal(undefined);
-      expect(match[2]).to.equal('1');
+      expect(match[2]).to.equal('#1');
 
       match = reReferenceParts.exec(string);
       expect(match[0]).to.equal(' #2');
       expect(match[1]).to.equal(undefined);
-      expect(match[2]).to.equal('2');
+      expect(match[2]).to.equal('#2');
 
       match = reReferenceParts.exec(string);
       expect(match[0]).to.equal(', something #3');
       expect(match[1]).to.equal(undefined);
-      expect(match[2]).to.equal('3');
+      expect(match[2]).to.equal('#3');
 
       match = reReferenceParts.exec(string);
       expect(match[0]).to.equal('; repo#4');
       expect(match[1]).to.equal('repo');
-      expect(match[2]).to.equal('4');
+      expect(match[2]).to.equal('#4');
     });
 
     it('should match issues with customized prefix', function() {
@@ -153,16 +153,15 @@ describe('regex', function() {
       reReferenceParts = regex({
         issuePrefixes: ['gh-', 'prefix-']
       }).referenceParts;
-
       var match = reReferenceParts.exec(string);
       expect(match[0]).to.equal('closes gh-1');
       expect(match[1]).to.equal(undefined);
-      expect(match[2]).to.equal('1');
+      expect(match[2]).to.equal('gh-1');
 
       match = reReferenceParts.exec(string);
       expect(match[0]).to.equal(', amends #2, fixes prefix-3');
       expect(match[1]).to.equal(undefined);
-      expect(match[2]).to.equal('3');
+      expect(match[2]).to.equal('prefix-3');
     });
 
     it('should match nothing if there is no customized prefix', function() {
