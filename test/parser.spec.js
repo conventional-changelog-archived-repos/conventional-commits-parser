@@ -481,7 +481,6 @@ describe('parser', function() {
     });
 
     it('should parse important notes that start with asterisks (for squash commits)', function() {
-
       var text = 'Previously multiple template bindings on one element\n' +
           '(ex. `<div *ngIf=\'..\' *ngFor=\'...\'>`) were allowed but most of the time\n' +
           'were leading to undesired result. It is possible that a small number\n' +
