@@ -480,7 +480,7 @@ describe('parser', function() {
       });
     });
 
-    it('should parse important notes that start with any non word characters (asterisks in squash commits)', function() {
+    it('should parse important notes that start with asterisks (for squash commits)', function() {
 
       var text = 'Previously multiple template bindings on one element\n' +
           '(ex. `<div *ngIf=\'..\' *ngFor=\'...\'>`) were allowed but most of the time\n' +
